@@ -50,6 +50,23 @@ services:
     volumes:
       - ./hive:/docker-entrypoint-initdb.d
 
+  spark:
+    image: bitnami/spark:latest
+    environment:
+      - SPARK_MODE=client
+      - HOME=/tmp
+      - SPARK_LOCAL_DIRS=/tmp
+      - SPARK_WORKER_DIR=/tmp
+    depends_on:
+      - hive-server
+    user: root
+    volumes:
+      - ./hive:/opt/hive/scripts
+      - ./data:/data
+      - ./:/app
+      - ./hive-site.xml:/opt/bitnami/spark/conf/hive-site.xml
+    command: bash -c "mkdir -p /tmp/.ivy2 && sleep infinity"
+
 volumes:
   namenode:
   datanode:
