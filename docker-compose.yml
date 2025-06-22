@@ -67,6 +67,38 @@ services:
       - ./hive-site.xml:/opt/bitnami/spark/conf/hive-site.xml
     command: bash -c "mkdir -p /tmp/.ivy2 && sleep infinity"
 
+  superset-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset
+    volumes:
+      - superset_db:/var/lib/postgresql/data
+
+  superset:
+    image: apache/superset:latest
+    environment:
+      - SUPERSET_LOAD_EXAMPLES=no
+      - SUPERSET_SECRET_KEY=supersecretkey
+      - SUPERSET_FEATURES_UPLOAD_AS_DATASET=true
+      - UPLOAD_FOLDER=/app/uploads
+      - DATABASE_URL=postgresql://superset:superset@superset-db:5432/superset
+    ports:
+      - "8088:5000"
+    volumes:
+      - ./uploads:/app/uploads
+    command: >
+      /bin/sh -c '
+        superset db upgrade &&
+        superset fab create-admin --username admin --firstname Admin --lastname User --email admin@admin.com --password admin || true &&
+        superset init &&
+        superset run -h 0.0.0.0 -p 5000'
+    depends_on:
+      - superset-db
+      - spark
+
 volumes:
   namenode:
   datanode:
+  superset_db:
