@@ -44,7 +44,7 @@ CREATE TABLE orders (
     total_price DECIMAL(10,2) NOT NULL,
     order_status VARCHAR(50) CHECK (order_status IN ('pendiente', 'preparando', 'listo', 'entregado')) NOT NULL,
     pick_in_site BOOLEAN NOT NULL DEFAULT FALSE,
-    order_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
@@ -78,6 +78,6 @@ INSERT INTO reservations (user_id, restaurant_id, reservation_time, status) VALU
 
 -- Insertar datos fake en orders
 INSERT INTO orders (user_id, restaurant_id, product_id, total_price, order_status, pick_in_site, order_date) VALUES
-('user01', 1, 1, 200.00, 'pendiente', TRUE, '2025-06-25'),
-('user02', 2, 3, 120.00, 'listo', FALSE, '2025-06-26'),
-('user03', 3, 5, 170.00, 'entregado', TRUE, '2025-06-27');
+('user01', 1, 1, 200.00, 'pendiente', TRUE, '2025-06-25 12:00:00'),
+('user02', 2, 3, 120.00, 'listo', FALSE, '2025-06-26 18:30:00'),
+('user03', 3, 5, 170.00, 'entregado', TRUE, '2025-06-27 09:15:00');

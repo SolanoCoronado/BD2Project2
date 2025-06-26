@@ -23,7 +23,7 @@ reservations = spark.read.option("header", True).csv("/data/reservations.csv")
 menus = spark.read.option("header", True).csv("/data/menus.csv")
 
 # 2. Limpieza y transformación
-orders = orders.withColumn("order_date", col("order_date").cast("date"))
+orders = orders.withColumn("order_date", col("order_date").cast("timestamp"))
 orders = orders.withColumn("total_price", col("total_price").cast("double"))
 products = products.withColumn("price", col("price").cast("double"))
 
@@ -108,11 +108,29 @@ GROUP BY fecha
 ORDER BY fecha
 """)
 
-# 6. Análisis requeridos
-# Tendencias de consumo
-spark.sql("SELECT * FROM restaurant_db.cubo_ventas_tiempo").show()
-# Horarios pico (si tienes hora en los datos, puedes agregarla a dim_tiempo y agrupar por hora)
+# 6. Análisis requeridos y exportar a CSV
+import pandas as pd
+
+# Tendencias de consumo (ventas por año y mes)
+tendencias_df = spark.sql("SELECT * FROM restaurant_db.cubo_ventas_tiempo")
+tendencias_df.toPandas().to_csv("/data/tendencias_consumo.csv", index=False)
+
+# Horarios pico (ahora sí hay hora)
+horarios_df = spark.sql("""
+SELECT hour(fecha) as hora, SUM(total) as total_ventas, COUNT(pedido_id) as num_pedidos
+FROM restaurant_db.fact_pedidos
+GROUP BY hour(fecha)
+ORDER BY total_ventas DESC
+""")
+horarios_df.toPandas().to_csv("/data/horarios_pico.csv", index=False)
+
 # Crecimiento mensual
-spark.sql("SELECT anio, mes, total_ventas, LAG(total_ventas) OVER (ORDER BY anio, mes) AS ventas_previas, (total_ventas - LAG(total_ventas) OVER (ORDER BY anio, mes)) / LAG(total_ventas) OVER (ORDER BY anio, mes) AS crecimiento FROM restaurant_db.cubo_ventas_tiempo").show()
+growth_df = spark.sql("""
+SELECT anio, mes, total_ventas,
+       LAG(total_ventas) OVER (ORDER BY anio, mes) AS ventas_previas,
+       (total_ventas - LAG(total_ventas) OVER (ORDER BY anio, mes)) / LAG(total_ventas) OVER (ORDER BY anio, mes) AS crecimiento
+FROM restaurant_db.cubo_ventas_tiempo
+""")
+growth_df.toPandas().to_csv("/data/crecimiento_mensual.csv", index=False)
 
 spark.stop()
