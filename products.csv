@@ -1,0 +1,1001 @@
+id,menu_id,name,price
+1,142,Baguette 10,187.18
+2,120,Pollo Broaster 15,106.89
+3,136,Quesadillas 13,115.26
+4,105,Pizza Hawaiana 9,125.25
+5,147,Milanesa de Pollo 20,141.0
+6,60,Tacos al Pastor 12,169.29
+7,96,Costillas Ahumadas 9,158.47
+8,80,Costillas Ahumadas 14,107.06
+9,55,Torta de Jamón 20,110.94
+10,119,Hamburguesa Clásica 15,53.24
+11,55,Quesadillas 14,46.7
+12,61,Arroz Frito 14,59.34
+13,133,Torta de Jamón 3,188.15
+14,148,Chorizo Asado 11,173.19
+15,191,Pizza Pepperoni 8,123.64
+16,120,Camarones Empanizados 20,151.48
+17,98,Ensalada César 13,174.45
+18,151,Pollo Saltado 13,125.72
+19,109,Pollo Broaster 3,46.63
+20,54,Tempura 15,56.54
+21,167,Café Americano 3,107.54
+22,148,Papas Fritas 10,177.6
+23,13,Aceitunas 9,33.29
+24,71,Pasta Alfredo 20,169.42
+25,173,Pizza Pepperoni 9,117.57
+26,10,Milanesa de Pollo 20,124.52
+27,75,Torta Cubana 11,105.27
+28,175,Hamburguesa Clásica 4,177.94
+29,103,Café Americano 17,166.52
+30,96,Pollo Teriyaki 4,40.54
+31,85,Lasaña 1,70.4
+32,194,Torta de Jamón 8,182.96
+33,44,Hamburguesa Veggie 7,34.37
+34,56,Ensalada de Pollo 20,63.37
+35,191,Pollo Teriyaki 3,111.93
+36,58,Papas Fritas 19,54.39
+37,32,Arroz Frito 4,106.9
+38,122,Pizza Pepperoni 11,33.58
+39,28,Tacos al Pastor 12,35.48
+40,148,Pasta Alfredo 20,62.17
+41,22,Pizza Pepperoni 7,159.85
+42,25,Quiche Lorraine 19,106.31
+43,44,Torta de Jamón 9,104.68
+44,137,Croissant 14,121.1
+45,1,Tempura 1,106.83
+46,9,Arroz Frito 10,151.11
+47,157,Quesadillas 18,167.67
+48,136,Sushi Roll 10,170.16
+49,111,Papas Gajo 2,169.25
+50,99,Chorizo Asado 3,149.48
+51,173,Nigiri 12,79.95
+52,41,Lasaña 8,99.97
+53,99,Hamburguesa Clásica 10,168.03
+54,183,Sushi Roll 12,85.74
+55,134,Nigiri 1,76.12
+56,20,Sashimi 13,55.74
+57,28,Chorizo Asado 11,58.6
+58,167,Pasta Alfredo 19,106.36
+59,186,Tacos al Pastor 16,143.39
+60,133,Camarones Empanizados 13,74.74
+61,117,Ceviche 18,55.74
+62,43,Pollo Saltado 7,111.57
+63,175,Milanesa de Pollo 17,190.92
+64,118,Costillas Ahumadas 11,112.53
+65,147,Milanesa de Pollo 11,197.04
+66,13,Ensalada César 5,157.19
+67,40,Café Americano 7,82.2
+68,47,Pollo Teriyaki 13,155.7
+69,185,Wrap Vegetariano 11,69.25
+70,104,Ensalada de Pollo 1,198.07
+71,68,Sashimi 13,90.71
+72,147,Croissant 1,182.65
+73,160,Aceitunas 12,89.66
+74,155,Ensalada de Pollo 12,148.28
+75,22,Tapas Variadas 10,77.43
+76,36,Quesadillas 7,101.99
+77,54,Carne Asada 20,187.81
+78,169,Hamburguesa Clásica 16,138.96
+79,69,Papas Fritas 11,77.1
+80,13,Pollo Saltado 15,121.38
+81,141,Arroz Frito 8,109.05
+82,180,Hamburguesa Veggie 6,106.79
+83,55,Puré de Papa 18,146.79
+84,31,Torta Cubana 8,100.88
+85,156,Ensalada César 12,166.45
+86,2,Carne Asada 19,94.88
+87,75,Pizza Margarita 10,84.74
+88,167,Aceitunas 10,163.04
+89,65,Croissant 7,169.16
+90,109,Sashimi 13,174.88
+91,164,Camarones Empanizados 13,187.06
+92,14,Wrap Vegetariano 9,52.56
+93,152,Camarones Empanizados 9,196.39
+94,193,Pizza Hawaiana 14,123.46
+95,64,Pollo Teriyaki 13,195.8
+96,81,Torta Cubana 3,66.69
+97,104,Arroz Frito 2,57.18
+98,156,Costillas BBQ 17,140.75
+99,185,Wrap Vegetariano 20,42.59
+100,83,Ceviche 6,119.45
+101,153,Milanesa de Pollo 4,80.98
+102,128,Ceviche 3,94.04
+103,187,Camarones Empanizados 14,196.68
+104,23,Sushi Roll 12,151.56
+105,88,Pasta Alfredo 4,127.15
+106,48,Baguette 2,58.87
+107,100,Aceitunas 11,72.93
+108,15,Torta de Jamón 18,74.08
+109,116,Café Americano 14,93.95
+110,15,Pollo Saltado 6,176.12
+111,5,Aceitunas 16,157.1
+112,137,Pizza Margarita 13,75.29
+113,154,Puré de Papa 2,124.83
+114,36,Aceitunas 12,160.59
+115,66,Tacos al Pastor 8,165.47
+116,45,Quiche Lorraine 14,163.22
+117,103,Quesadillas 6,144.23
+118,29,Costillas Ahumadas 4,75.55
+119,144,Café Americano 1,114.24
+120,50,Costillas Ahumadas 11,64.3
+121,101,Torta Cubana 4,48.85
+122,139,Pasta Alfredo 5,174.17
+123,30,Chorizo Asado 7,59.31
+124,145,Chorizo Asado 16,119.99
+125,95,Pollo Teriyaki 1,126.63
+126,169,Sashimi 12,49.04
+127,172,Hamburguesa Clásica 9,45.68
+128,155,Wrap Vegetariano 6,84.46
+129,15,Ensalada César 5,131.11
+130,45,Camarones Empanizados 16,114.71
+131,169,Quesadillas 12,144.47
+132,31,Café Americano 4,144.06
+133,27,Pizza Pepperoni 18,68.3
+134,83,Costillas BBQ 11,59.49
+135,24,Camarones Empanizados 9,150.6
+136,4,Nigiri 5,121.11
+137,137,Café Americano 8,194.78
+138,91,Carne Asada 4,139.85
+139,6,Pasta Alfredo 9,180.0
+140,71,Tapas Variadas 19,194.0
+141,123,Pollo Saltado 15,76.56
+142,103,Hamburguesa Clásica 19,71.56
+143,59,Camarones Empanizados 17,125.59
+144,158,Hamburguesa Veggie 6,90.42
+145,49,Croissant 19,170.65
+146,33,Costillas Ahumadas 16,131.48
+147,198,Papas Fritas 14,184.14
+148,135,Café Americano 12,121.22
+149,87,Pollo Saltado 16,146.81
+150,162,Papas Gajo 10,143.07
+151,46,Camarones Empanizados 10,62.12
+152,155,Café Americano 2,142.45
+153,144,Croissant 2,123.49
+154,186,Pasta Alfredo 18,115.39
+155,117,Camarones Empanizados 20,163.59
+156,20,Tapas Variadas 8,93.6
+157,137,Pizza Margarita 18,31.34
+158,44,Pizza Margarita 14,184.05
+159,188,Papas Gajo 11,105.18
+160,141,Carne Asada 2,117.44
+161,151,Quesadillas 14,72.8
+162,45,Tempura 9,179.18
+163,43,Pasta Alfredo 6,138.14
+164,154,Torta de Jamón 16,128.67
+165,119,Arroz Frito 16,197.81
+166,174,Arroz Chaufa 15,33.45
+167,64,Arroz Chaufa 18,41.56
+168,77,Arroz Frito 6,143.47
+169,79,Arroz Chaufa 3,175.86
+170,6,Ensalada de Pollo 19,77.29
+171,139,Pollo Saltado 15,99.23
+172,164,Papas Gajo 6,153.52
+173,4,Camarones Empanizados 11,125.86
+174,126,Quesadillas 15,127.97
+175,82,Costillas Ahumadas 19,119.61
+176,103,Nigiri 8,47.23
+177,77,Torta Cubana 13,39.78
+178,184,Pollo Broaster 14,123.79
+179,35,Milanesa de Pollo 17,134.83
+180,195,Milanesa de Pollo 14,54.66
+181,54,Café Americano 5,51.46
+182,147,Ensalada César 3,40.49
+183,158,Wrap Vegetariano 20,31.37
+184,170,Pizza Hawaiana 12,145.98
+185,197,Torta de Jamón 13,149.58
+186,139,Ensalada César 13,86.61
+187,27,Carne Asada 9,162.45
+188,4,Tempura 4,120.09
+189,89,Ceviche 15,139.55
+190,92,Chorizo Asado 1,65.17
+191,17,Puré de Papa 18,147.34
+192,48,Arroz Chaufa 14,32.29
+193,9,Milanesa de Pollo 4,151.4
+194,45,Ensalada César 8,62.89
+195,60,Ensalada César 10,171.05
+196,163,Chorizo Asado 18,105.17
+197,50,Wrap Vegetariano 5,84.95
+198,52,Sushi Roll 19,89.67
+199,83,Torta Cubana 10,73.34
+200,169,Carne Asada 12,116.21
+201,1,Pizza Pepperoni 13,32.85
+202,183,Hamburguesa Clásica 12,184.53
+203,59,Ensalada César 11,150.84
+204,167,Aceitunas 18,176.67
+205,92,Puré de Papa 15,184.85
+206,69,Ensalada 14,123.7
+207,100,Pollo Broaster 2,170.34
+208,182,Costillas Ahumadas 16,129.84
+209,114,Costillas BBQ 20,60.02
+210,82,Ceviche 4,172.51
+211,46,Tacos al Pastor 8,110.91
+212,152,Tapas Variadas 14,143.44
+213,98,Torta Cubana 1,34.95
+214,78,Ensalada César 20,117.42
+215,31,Ceviche 7,78.89
+216,107,Ensalada 13,124.99
+217,56,Milanesa de Pollo 18,56.75
+218,147,Ensalada de Pollo 12,126.87
+219,79,Pizza Pepperoni 8,58.37
+220,127,Quiche Lorraine 7,175.94
+221,9,Sushi Roll 4,183.97
+222,93,Milanesa de Pollo 13,140.44
+223,66,Aceitunas 6,136.4
+224,149,Quesadillas 5,49.98
+225,19,Pizza Margarita 2,131.6
+226,96,Hamburguesa Clásica 2,52.59
+227,53,Puré de Papa 19,62.92
+228,7,Pollo Saltado 11,98.35
+229,109,Milanesa de Pollo 8,150.0
+230,124,Arroz Chaufa 12,142.01
+231,172,Lasaña 2,119.89
+232,132,Carne Asada 19,192.04
+233,151,Torta Cubana 19,194.39
+234,96,Nigiri 4,39.76
+235,115,Quiche Lorraine 1,189.39
+236,81,Pizza Hawaiana 14,56.47
+237,2,Costillas BBQ 1,168.5
+238,155,Ensalada de Pollo 9,55.1
+239,28,Baguette 6,199.88
+240,29,Aceitunas 18,56.57
+241,124,Chorizo Asado 6,102.81
+242,25,Hamburguesa Veggie 4,126.22
+243,176,Nigiri 2,159.08
+244,6,Tempura 15,180.48
+245,78,Ensalada César 12,93.63
+246,105,Hamburguesa Clásica 20,195.16
+247,170,Quesadillas 9,112.69
+248,5,Ensalada 12,93.21
+249,168,Pizza Pepperoni 20,137.9
+250,128,Pasta Alfredo 4,142.95
+251,109,Pollo Saltado 6,44.9
+252,1,Hamburguesa Clásica 12,158.65
+253,41,Quesadillas 4,125.5
+254,15,Baguette 14,112.58
+255,72,Milanesa de Pollo 2,181.83
+256,173,Tapas Variadas 14,62.05
+257,97,Ensalada 1,127.98
+258,67,Ensalada César 6,152.56
+259,48,Ceviche 4,40.44
+260,162,Ensalada de Pollo 15,31.98
+261,33,Puré de Papa 17,97.98
+262,45,Hamburguesa Veggie 8,39.84
+263,155,Tacos al Pastor 16,63.06
+264,2,Ensalada 17,37.33
+265,61,Pollo Saltado 9,158.33
+266,119,Pizza Hawaiana 2,187.83
+267,152,Pollo Broaster 1,189.92
+268,168,Pollo Saltado 4,56.27
+269,10,Lasaña 7,130.53
+270,128,Ensalada César 14,112.8
+271,84,Arroz Frito 5,177.99
+272,182,Carne Asada 7,78.21
+273,86,Ensalada César 8,196.72
+274,71,Pizza Margarita 20,111.83
+275,111,Arroz Frito 14,138.23
+276,67,Torta Cubana 11,192.32
+277,197,Baguette 7,76.27
+278,73,Tempura 3,178.58
+279,138,Torta de Jamón 13,50.74
+280,195,Costillas Ahumadas 4,147.76
+281,22,Pasta Alfredo 2,118.64
+282,72,Hamburguesa Veggie 8,185.47
+283,177,Nigiri 4,192.66
+284,139,Croissant 9,160.32
+285,53,Lasaña 9,192.24
+286,79,Arroz Chaufa 18,104.49
+287,29,Torta de Jamón 13,84.44
+288,139,Quesadillas 6,198.47
+289,26,Costillas Ahumadas 18,66.73
+290,12,Sashimi 1,103.82
+291,42,Puré de Papa 11,35.37
+292,44,Pizza Margarita 19,134.0
+293,23,Tempura 19,163.12
+294,62,Nigiri 13,126.06
+295,37,Tapas Variadas 19,142.25
+296,29,Pollo Teriyaki 3,79.2
+297,160,Carne Asada 13,196.6
+298,7,Wrap Vegetariano 17,193.26
+299,53,Quesadillas 11,179.43
+300,152,Pollo Broaster 16,99.26
+301,175,Arroz Chaufa 10,112.98
+302,128,Pasta Alfredo 8,168.56
+303,200,Pizza Pepperoni 11,176.71
+304,91,Quesadillas 14,40.3
+305,118,Ensalada de Pollo 5,55.66
+306,121,Aceitunas 10,178.15
+307,8,Hamburguesa Clásica 3,50.2
+308,64,Torta de Jamón 11,66.26
+309,8,Baguette 7,70.04
+310,169,Lasaña 12,104.2
+311,197,Quesadillas 1,181.78
+312,198,Pasta Alfredo 13,58.62
+313,127,Croissant 6,77.01
+314,146,Pasta Alfredo 9,99.78
+315,17,Baguette 12,35.0
+316,60,Torta Cubana 18,53.44
+317,81,Tacos al Pastor 19,73.2
+318,167,Pasta Alfredo 19,172.02
+319,50,Sushi Roll 11,80.93
+320,53,Café Americano 8,60.31
+321,22,Ensalada César 6,91.41
+322,17,Torta Cubana 7,163.43
+323,148,Sashimi 11,74.69
+324,72,Ensalada de Pollo 13,169.9
+325,164,Sushi Roll 2,60.48
+326,150,Tacos al Pastor 7,62.71
+327,56,Hamburguesa Veggie 8,35.0
+328,167,Ensalada de Pollo 3,121.16
+329,83,Carne Asada 13,52.26
+330,148,Costillas Ahumadas 12,86.92
+331,174,Wrap Vegetariano 18,81.17
+332,195,Baguette 18,134.18
+333,42,Tempura 13,171.77
+334,123,Puré de Papa 3,45.73
+335,108,Costillas BBQ 12,125.72
+336,83,Tapas Variadas 7,116.08
+337,39,Sushi Roll 19,129.59
+338,104,Costillas BBQ 12,81.81
+339,196,Torta de Jamón 5,68.38
+340,27,Ensalada 2,105.83
+341,99,Pizza Hawaiana 2,193.95
+342,175,Ensalada César 15,113.01
+343,92,Quesadillas 5,59.19
+344,189,Pollo Saltado 7,187.6
+345,42,Camarones Empanizados 11,181.06
+346,25,Hamburguesa Veggie 7,95.57
+347,35,Wrap Vegetariano 17,86.44
+348,41,Tapas Variadas 18,38.2
+349,86,Papas Fritas 17,195.63
+350,50,Costillas Ahumadas 10,133.5
+351,67,Chorizo Asado 20,69.21
+352,172,Pollo Broaster 3,118.54
+353,99,Pasta Alfredo 5,151.95
+354,186,Sushi Roll 13,106.03
+355,151,Sashimi 8,121.28
+356,73,Sashimi 7,175.4
+357,113,Pollo Broaster 11,54.04
+358,117,Puré de Papa 16,43.35
+359,26,Nigiri 4,175.71
+360,198,Camarones Empanizados 7,169.42
+361,65,Hamburguesa Clásica 10,159.04
+362,160,Ceviche 14,182.63
+363,120,Papas Fritas 3,181.85
+364,187,Papas Gajo 20,131.04
+365,156,Sashimi 20,93.23
+366,35,Papas Fritas 8,182.79
+367,42,Pizza Hawaiana 5,53.16
+368,100,Torta Cubana 7,135.47
+369,193,Pizza Hawaiana 13,93.78
+370,49,Arroz Chaufa 1,90.8
+371,56,Carne Asada 3,54.63
+372,55,Pizza Hawaiana 4,96.45
+373,195,Hamburguesa Clásica 15,188.45
+374,138,Costillas BBQ 6,86.03
+375,126,Torta Cubana 9,196.86
+376,181,Baguette 20,162.1
+377,78,Pollo Broaster 18,106.11
+378,142,Pasta Alfredo 14,52.66
+379,47,Tacos al Pastor 7,84.06
+380,199,Ensalada de Pollo 16,79.5
+381,113,Papas Gajo 2,77.33
+382,177,Lasaña 14,110.2
+383,13,Torta de Jamón 11,196.68
+384,123,Wrap Vegetariano 1,82.2
+385,29,Ensalada César 13,158.89
+386,107,Hamburguesa Veggie 11,41.04
+387,146,Camarones Empanizados 6,149.43
+388,165,Pizza Margarita 2,98.27
+389,174,Quiche Lorraine 10,44.99
+390,95,Ceviche 19,175.03
+391,89,Chorizo Asado 14,164.75
+392,144,Ensalada de Pollo 8,96.0
+393,12,Café Americano 12,107.38
+394,21,Hamburguesa Clásica 10,143.44
+395,172,Wrap Vegetariano 16,198.63
+396,172,Café Americano 14,73.14
+397,29,Quiche Lorraine 17,194.72
+398,198,Papas Gajo 3,117.43
+399,127,Pasta Alfredo 11,170.2
+400,191,Wrap Vegetariano 9,130.12
+401,167,Pollo Saltado 15,79.01
+402,191,Pizza Hawaiana 8,176.85
+403,177,Ensalada 5,141.08
+404,110,Quesadillas 15,146.75
+405,165,Lasaña 16,36.41
+406,133,Nigiri 18,178.44
+407,41,Ceviche 12,184.13
+408,86,Pollo Teriyaki 9,32.98
+409,75,Pollo Broaster 9,37.44
+410,157,Pollo Broaster 13,41.51
+411,188,Pasta Alfredo 20,66.0
+412,40,Papas Gajo 6,192.76
+413,32,Wrap Vegetariano 8,143.58
+414,77,Milanesa de Pollo 3,142.33
+415,45,Pizza Pepperoni 3,86.16
+416,124,Café Americano 7,178.96
+417,94,Puré de Papa 16,98.31
+418,63,Pizza Hawaiana 16,56.33
+419,128,Pollo Saltado 17,198.64
+420,32,Croissant 8,170.97
+421,75,Arroz Frito 1,31.5
+422,15,Ensalada César 17,83.39
+423,157,Papas Gajo 7,196.35
+424,143,Torta Cubana 10,106.9
+425,161,Sashimi 7,179.93
+426,111,Aceitunas 14,132.97
+427,50,Hamburguesa Veggie 16,178.7
+428,81,Quesadillas 9,93.01
+429,159,Croissant 10,175.97
+430,82,Hamburguesa Clásica 1,61.56
+431,23,Torta de Jamón 2,133.61
+432,62,Papas Gajo 11,74.19
+433,71,Pizza Margarita 2,37.66
+434,11,Tacos al Pastor 9,129.11
+435,81,Torta Cubana 4,173.65
+436,79,Pollo Teriyaki 3,35.58
+437,151,Chorizo Asado 16,44.22
+438,60,Costillas Ahumadas 18,34.77
+439,24,Pizza Hawaiana 4,88.97
+440,5,Quiche Lorraine 4,36.98
+441,17,Pollo Broaster 18,34.57
+442,167,Quesadillas 19,199.93
+443,71,Pollo Broaster 17,103.29
+444,166,Pollo Broaster 4,121.14
+445,180,Sushi Roll 13,151.33
+446,136,Wrap Vegetariano 10,45.34
+447,67,Chorizo Asado 17,164.73
+448,72,Ensalada de Pollo 5,181.29
+449,149,Wrap Vegetariano 14,60.99
+450,34,Hamburguesa Veggie 17,164.01
+451,57,Sushi Roll 1,169.15
+452,111,Milanesa de Pollo 2,34.41
+453,40,Pollo Broaster 2,195.83
+454,19,Papas Fritas 1,165.7
+455,187,Wrap Vegetariano 1,47.46
+456,103,Quesadillas 9,191.97
+457,185,Pasta Alfredo 18,81.13
+458,97,Pollo Saltado 12,74.17
+459,115,Baguette 19,122.64
+460,99,Ensalada de Pollo 6,74.5
+461,186,Torta Cubana 5,131.74
+462,117,Puré de Papa 15,61.21
+463,70,Ensalada 9,97.02
+464,5,Arroz Frito 11,171.84
+465,89,Hamburguesa Clásica 19,153.97
+466,43,Quiche Lorraine 15,118.08
+467,149,Baguette 15,93.86
+468,99,Croissant 8,49.7
+469,124,Pizza Margarita 11,146.19
+470,107,Sashimi 16,83.25
+471,22,Papas Gajo 12,122.09
+472,66,Papas Gajo 5,97.24
+473,110,Tacos al Pastor 8,60.47
+474,64,Wrap Vegetariano 19,141.73
+475,166,Tapas Variadas 6,157.88
+476,30,Costillas BBQ 17,106.23
+477,58,Carne Asada 18,97.97
+478,175,Café Americano 12,193.32
+479,123,Arroz Frito 20,92.98
+480,69,Pasta Alfredo 16,174.85
+481,57,Carne Asada 4,54.35
+482,54,Pizza Hawaiana 15,115.51
+483,114,Pizza Hawaiana 6,67.37
+484,25,Café Americano 19,98.97
+485,94,Pollo Teriyaki 11,91.72
+486,19,Quesadillas 10,184.83
+487,62,Ceviche 5,36.94
+488,13,Ensalada de Pollo 12,82.99
+489,164,Lasaña 1,94.77
+490,177,Costillas Ahumadas 5,161.44
+491,10,Pollo Saltado 19,103.28
+492,68,Sushi Roll 10,101.18
+493,69,Aceitunas 9,152.4
+494,161,Ceviche 14,30.89
+495,95,Pizza Hawaiana 2,198.98
+496,125,Puré de Papa 9,70.76
+497,132,Milanesa de Pollo 10,64.75
+498,77,Tacos al Pastor 14,187.79
+499,106,Ensalada César 13,56.51
+500,186,Costillas Ahumadas 5,64.8
+501,79,Torta Cubana 9,188.51
+502,24,Nigiri 13,41.89
+503,78,Papas Gajo 14,130.5
+504,98,Sushi Roll 3,161.83
+505,175,Arroz Chaufa 2,117.6
+506,18,Pollo Broaster 3,140.05
+507,66,Nigiri 3,41.81
+508,144,Tacos al Pastor 17,199.7
+509,3,Costillas Ahumadas 13,96.8
+510,27,Camarones Empanizados 5,185.61
+511,20,Quesadillas 16,186.88
+512,133,Pollo Teriyaki 7,82.37
+513,79,Costillas BBQ 12,161.15
+514,162,Aceitunas 12,182.63
+515,112,Costillas Ahumadas 17,103.22
+516,166,Hamburguesa Veggie 19,183.0
+517,80,Arroz Frito 8,41.26
+518,68,Papas Gajo 11,199.75
+519,197,Papas Gajo 17,84.23
+520,69,Torta de Jamón 13,49.42
+521,29,Tempura 12,124.07
+522,111,Pollo Teriyaki 19,59.13
+523,2,Chorizo Asado 16,147.22
+524,185,Arroz Chaufa 15,161.3
+525,34,Costillas Ahumadas 15,130.79
+526,98,Ceviche 19,35.99
+527,120,Baguette 12,153.09
+528,109,Costillas BBQ 3,80.92
+529,142,Pasta Alfredo 13,146.6
+530,58,Pollo Broaster 19,64.77
+531,21,Croissant 12,163.36
+532,79,Hamburguesa Clásica 2,137.92
+533,172,Arroz Chaufa 20,39.68
+534,52,Quesadillas 13,170.16
+535,36,Café Americano 13,79.77
+536,129,Hamburguesa Clásica 4,137.41
+537,109,Quesadillas 1,78.58
+538,102,Pizza Margarita 15,196.81
+539,110,Lasaña 18,90.12
+540,133,Chorizo Asado 15,92.12
+541,164,Camarones Empanizados 17,109.4
+542,114,Tempura 1,139.45
+543,25,Ensalada 14,195.46
+544,115,Arroz Frito 18,90.82
+545,158,Pizza Margarita 1,33.89
+546,124,Puré de Papa 3,77.61
+547,11,Hamburguesa Clásica 1,92.55
+548,9,Aceitunas 11,127.96
+549,135,Sushi Roll 4,81.2
+550,141,Ceviche 4,165.75
+551,44,Pasta Alfredo 10,101.5
+552,4,Lasaña 8,175.37
+553,167,Pollo Saltado 2,129.17
+554,77,Arroz Frito 8,50.07
+555,68,Wrap Vegetariano 15,124.25
+556,22,Papas Gajo 20,107.73
+557,180,Sushi Roll 7,62.22
+558,85,Costillas Ahumadas 16,95.2
+559,122,Baguette 10,79.08
+560,54,Papas Gajo 17,126.65
+561,66,Café Americano 20,43.71
+562,8,Papas Fritas 1,100.91
+563,69,Sashimi 2,172.96
+564,44,Hamburguesa Veggie 3,196.01
+565,5,Costillas Ahumadas 4,145.65
+566,174,Quesadillas 16,104.42
+567,197,Tempura 4,186.09
+568,168,Pollo Saltado 6,103.52
+569,150,Pizza Margarita 20,117.98
+570,35,Hamburguesa Veggie 3,168.42
+571,13,Arroz Frito 5,185.51
+572,74,Pollo Saltado 8,144.71
+573,76,Ensalada de Pollo 3,167.03
+574,157,Papas Fritas 14,111.06
+575,68,Pasta Alfredo 5,148.4
+576,144,Sushi Roll 2,100.11
+577,83,Pizza Pepperoni 18,136.09
+578,114,Milanesa de Pollo 19,52.49
+579,22,Croissant 2,160.42
+580,159,Wrap Vegetariano 10,35.02
+581,20,Pasta Alfredo 8,107.06
+582,171,Papas Gajo 13,46.8
+583,194,Pollo Saltado 1,80.12
+584,126,Quesadillas 12,132.05
+585,54,Pasta Alfredo 4,133.03
+586,94,Sushi Roll 15,193.08
+587,14,Café Americano 19,113.27
+588,72,Pollo Broaster 7,100.73
+589,110,Pollo Teriyaki 7,95.7
+590,24,Hamburguesa Veggie 15,173.99
+591,103,Ensalada César 10,96.74
+592,75,Lasaña 13,70.5
+593,83,Aceitunas 12,164.56
+594,66,Camarones Empanizados 9,140.99
+595,189,Camarones Empanizados 12,121.14
+596,169,Costillas BBQ 7,57.3
+597,46,Costillas BBQ 1,167.28
+598,178,Nigiri 5,113.34
+599,36,Ensalada César 5,77.44
+600,30,Sushi Roll 20,127.29
+601,138,Sushi Roll 4,104.21
+602,140,Nigiri 10,56.11
+603,105,Chorizo Asado 19,104.96
+604,123,Lasaña 4,46.77
+605,86,Pollo Saltado 17,121.35
+606,73,Costillas BBQ 19,164.39
+607,191,Wrap Vegetariano 17,110.96
+608,172,Pizza Hawaiana 11,91.72
+609,20,Torta Cubana 4,35.04
+610,189,Carne Asada 14,167.79
+611,171,Ensalada César 6,170.2
+612,124,Baguette 16,157.04
+613,22,Sashimi 4,152.33
+614,108,Papas Fritas 14,41.49
+615,56,Quesadillas 10,143.77
+616,110,Papas Fritas 2,36.58
+617,151,Sushi Roll 20,62.65
+618,43,Pollo Broaster 18,128.12
+619,16,Milanesa de Pollo 3,115.2
+620,106,Quiche Lorraine 15,92.86
+621,93,Ensalada César 16,124.6
+622,117,Pollo Teriyaki 16,40.48
+623,169,Quesadillas 8,55.82
+624,164,Hamburguesa Clásica 15,76.5
+625,75,Pollo Saltado 9,181.58
+626,149,Quiche Lorraine 11,189.68
+627,163,Tempura 4,66.36
+628,39,Baguette 10,151.08
+629,52,Papas Gajo 14,82.44
+630,166,Café Americano 5,86.52
+631,196,Ensalada 5,80.6
+632,198,Nigiri 9,44.25
+633,152,Nigiri 11,52.01
+634,98,Ensalada de Pollo 14,84.14
+635,92,Puré de Papa 14,162.31
+636,71,Tacos al Pastor 1,155.45
+637,5,Arroz Frito 6,195.79
+638,149,Papas Gajo 18,107.86
+639,34,Pizza Margarita 11,37.53
+640,44,Camarones Empanizados 3,59.15
+641,18,Café Americano 11,78.73
+642,189,Puré de Papa 11,44.88
+643,122,Hamburguesa Veggie 16,82.43
+644,129,Pizza Pepperoni 17,38.57
+645,195,Torta de Jamón 13,121.9
+646,115,Ensalada 9,34.22
+647,59,Ensalada 2,66.41
+648,111,Hamburguesa Veggie 12,197.23
+649,127,Torta Cubana 15,182.75
+650,143,Pizza Margarita 18,145.15
+651,115,Croissant 11,176.71
+652,146,Chorizo Asado 8,193.31
+653,29,Quesadillas 16,193.6
+654,12,Ceviche 8,132.45
+655,4,Puré de Papa 1,71.3
+656,25,Sushi Roll 10,35.11
+657,84,Tapas Variadas 20,61.65
+658,4,Arroz Chaufa 13,139.21
+659,161,Sashimi 4,178.39
+660,14,Pizza Pepperoni 2,104.83
+661,108,Ceviche 13,114.27
+662,153,Baguette 10,67.94
+663,15,Pizza Pepperoni 13,127.8
+664,150,Puré de Papa 16,119.23
+665,6,Pollo Teriyaki 20,67.84
+666,99,Papas Fritas 6,164.79
+667,51,Aceitunas 3,97.62
+668,104,Papas Fritas 10,122.04
+669,13,Aceitunas 4,154.88
+670,28,Tacos al Pastor 11,119.62
+671,198,Torta Cubana 6,68.25
+672,151,Pizza Pepperoni 13,78.3
+673,96,Pizza Margarita 20,54.77
+674,169,Chorizo Asado 16,124.79
+675,131,Papas Gajo 3,117.49
+676,149,Croissant 20,78.84
+677,72,Pizza Pepperoni 9,102.63
+678,146,Ceviche 16,132.87
+679,77,Papas Fritas 7,38.0
+680,157,Chorizo Asado 10,102.66
+681,39,Pasta Alfredo 3,190.68
+682,5,Quesadillas 19,64.6
+683,47,Milanesa de Pollo 12,164.92
+684,169,Costillas BBQ 2,79.64
+685,32,Papas Fritas 20,144.37
+686,125,Hamburguesa Clásica 15,74.9
+687,190,Arroz Chaufa 7,183.57
+688,3,Costillas Ahumadas 17,90.36
+689,189,Hamburguesa Veggie 3,192.93
+690,105,Baguette 4,148.1
+691,153,Pollo Broaster 10,56.88
+692,163,Arroz Frito 4,153.86
+693,157,Quesadillas 8,149.76
+694,17,Quiche Lorraine 17,83.12
+695,123,Baguette 8,120.25
+696,21,Ensalada 16,88.68
+697,178,Ensalada 3,66.99
+698,41,Arroz Frito 17,40.28
+699,62,Puré de Papa 19,150.02
+700,78,Pollo Broaster 8,121.96
+701,136,Ceviche 10,138.58
+702,63,Nigiri 15,177.16
+703,8,Ensalada César 10,136.8
+704,112,Costillas BBQ 20,185.44
+705,142,Papas Gajo 15,80.97
+706,198,Quesadillas 11,42.95
+707,111,Sushi Roll 16,61.26
+708,41,Ensalada César 15,161.63
+709,199,Quiche Lorraine 4,112.36
+710,13,Quesadillas 2,196.7
+711,78,Camarones Empanizados 16,142.07
+712,6,Pizza Pepperoni 3,63.02
+713,87,Pizza Margarita 7,161.65
+714,169,Pollo Broaster 16,117.62
+715,3,Pizza Pepperoni 6,145.24
+716,131,Ensalada de Pollo 5,55.17
+717,74,Costillas Ahumadas 6,83.8
+718,115,Milanesa de Pollo 9,137.42
+719,143,Lasaña 19,189.32
+720,189,Ensalada César 9,30.98
+721,14,Papas Gajo 13,189.78
+722,4,Carne Asada 15,166.89
+723,11,Pollo Saltado 5,85.34
+724,17,Sashimi 10,90.03
+725,105,Torta Cubana 3,55.4
+726,199,Pizza Margarita 11,38.29
+727,87,Café Americano 10,84.97
+728,181,Chorizo Asado 12,198.43
+729,10,Ensalada 6,178.91
+730,121,Café Americano 9,156.88
+731,54,Quiche Lorraine 16,189.75
+732,141,Tacos al Pastor 17,109.95
+733,37,Costillas BBQ 17,42.57
+734,196,Hamburguesa Clásica 18,61.69
+735,38,Ensalada de Pollo 9,116.24
+736,35,Aceitunas 4,32.86
+737,173,Sushi Roll 19,35.52
+738,66,Hamburguesa Clásica 12,113.81
+739,177,Baguette 5,63.54
+740,14,Sashimi 6,114.76
+741,169,Costillas Ahumadas 13,157.1
+742,2,Torta Cubana 11,166.24
+743,105,Papas Fritas 8,33.9
+744,98,Costillas Ahumadas 12,85.0
+745,20,Ensalada de Pollo 5,186.39
+746,107,Arroz Frito 9,152.17
+747,8,Croissant 17,123.2
+748,170,Quesadillas 19,113.11
+749,80,Wrap Vegetariano 9,141.14
+750,61,Ensalada César 6,110.81
+751,6,Nigiri 10,43.26
+752,4,Costillas BBQ 7,48.34
+753,173,Chorizo Asado 3,34.01
+754,56,Tapas Variadas 14,186.94
+755,175,Papas Fritas 12,79.7
+756,47,Aceitunas 5,126.87
+757,10,Pizza Margarita 16,120.86
+758,168,Tapas Variadas 2,60.88
+759,199,Ensalada César 7,44.39
+760,88,Hamburguesa Clásica 4,99.36
+761,89,Pollo Saltado 4,147.96
+762,55,Papas Gajo 3,130.44
+763,86,Quesadillas 4,84.46
+764,19,Baguette 12,119.15
+765,28,Tapas Variadas 2,106.18
+766,129,Pollo Broaster 19,166.16
+767,71,Torta Cubana 17,86.21
+768,165,Café Americano 2,176.89
+769,9,Aceitunas 16,108.08
+770,26,Ensalada César 13,170.51
+771,153,Torta Cubana 17,185.32
+772,111,Sashimi 19,151.04
+773,3,Papas Gajo 10,127.16
+774,19,Pasta Alfredo 17,161.75
+775,83,Costillas Ahumadas 19,148.79
+776,96,Papas Gajo 19,152.4
+777,55,Carne Asada 13,164.62
+778,88,Ensalada César 5,176.39
+779,134,Pollo Teriyaki 3,194.51
+780,112,Quesadillas 7,84.77
+781,41,Pizza Pepperoni 13,78.35
+782,71,Camarones Empanizados 13,74.91
+783,27,Chorizo Asado 7,180.72
+784,140,Costillas BBQ 16,196.7
+785,6,Ensalada 19,122.34
+786,118,Pizza Margarita 7,54.09
+787,35,Hamburguesa Veggie 20,69.93
+788,142,Hamburguesa Veggie 7,37.95
+789,33,Costillas Ahumadas 16,40.43
+790,164,Puré de Papa 7,118.12
+791,96,Pollo Broaster 4,101.26
+792,60,Quiche Lorraine 4,142.01
+793,137,Pollo Saltado 11,30.43
+794,111,Ensalada César 5,82.99
+795,49,Pollo Teriyaki 10,139.28
+796,29,Pizza Margarita 3,93.48
+797,122,Sushi Roll 1,110.19
+798,63,Pollo Saltado 2,130.32
+799,179,Hamburguesa Veggie 4,70.44
+800,47,Papas Gajo 15,156.83
+801,106,Pizza Hawaiana 11,43.99
+802,94,Arroz Frito 12,65.98
+803,98,Camarones Empanizados 16,60.54
+804,149,Sushi Roll 16,173.78
+805,2,Carne Asada 20,192.11
+806,165,Pollo Teriyaki 4,156.01
+807,141,Pizza Hawaiana 10,91.62
+808,87,Papas Fritas 13,176.66
+809,114,Croissant 12,44.11
+810,73,Tacos al Pastor 7,49.44
+811,23,Papas Fritas 1,83.73
+812,86,Pizza Pepperoni 20,130.21
+813,157,Pollo Broaster 19,166.21
+814,56,Milanesa de Pollo 3,46.68
+815,11,Quesadillas 15,159.83
+816,115,Baguette 10,47.27
+817,112,Torta de Jamón 3,181.41
+818,138,Baguette 19,199.71
+819,45,Pollo Saltado 19,40.16
+820,140,Arroz Chaufa 1,100.14
+821,70,Ceviche 6,130.05
+822,139,Quiche Lorraine 8,77.39
+823,161,Pizza Pepperoni 13,66.2
+824,29,Quiche Lorraine 2,70.82
+825,102,Tapas Variadas 7,148.12
+826,43,Baguette 6,159.97
+827,134,Puré de Papa 12,192.93
+828,25,Milanesa de Pollo 10,69.17
+829,156,Sashimi 13,168.67
+830,40,Puré de Papa 5,95.17
+831,69,Pollo Teriyaki 8,36.0
+832,147,Camarones Empanizados 2,81.28
+833,186,Camarones Empanizados 3,88.08
+834,83,Ceviche 1,143.69
+835,184,Costillas Ahumadas 4,154.9
+836,158,Sushi Roll 19,54.92
+837,127,Ensalada 12,184.42
+838,65,Tacos al Pastor 14,68.54
+839,31,Torta Cubana 2,58.59
+840,78,Papas Fritas 8,40.87
+841,39,Milanesa de Pollo 8,65.81
+842,70,Pasta Alfredo 12,87.4
+843,103,Wrap Vegetariano 19,93.72
+844,133,Arroz Chaufa 18,85.49
+845,63,Arroz Chaufa 15,78.74
+846,133,Papas Fritas 17,192.11
+847,59,Tacos al Pastor 17,168.51
+848,133,Pollo Saltado 12,123.91
+849,52,Pizza Hawaiana 19,34.35
+850,134,Quesadillas 19,70.98
+851,152,Pizza Margarita 6,177.56
+852,2,Pollo Saltado 2,50.33
+853,171,Carne Asada 3,124.42
+854,184,Costillas Ahumadas 18,73.08
+855,74,Wrap Vegetariano 5,166.31
+856,48,Nigiri 5,107.29
+857,184,Aceitunas 1,50.85
+858,11,Quiche Lorraine 20,128.21
+859,29,Pollo Broaster 10,86.43
+860,10,Sashimi 13,152.48
+861,175,Puré de Papa 9,99.23
+862,108,Ensalada 17,181.81
+863,190,Tapas Variadas 18,193.29
+864,73,Sushi Roll 10,69.32
+865,45,Tacos al Pastor 15,134.24
+866,31,Baguette 14,179.51
+867,33,Café Americano 10,67.82
+868,30,Torta Cubana 10,179.55
+869,119,Ensalada César 7,154.18
+870,10,Costillas BBQ 20,95.23
+871,10,Costillas Ahumadas 20,183.71
+872,89,Pollo Broaster 19,91.26
+873,36,Aceitunas 13,182.32
+874,139,Hamburguesa Veggie 14,149.12
+875,152,Quiche Lorraine 11,152.86
+876,50,Hamburguesa Veggie 13,82.5
+877,170,Costillas BBQ 1,35.7
+878,83,Chorizo Asado 5,152.99
+879,62,Aceitunas 15,85.21
+880,12,Camarones Empanizados 4,35.61
+881,169,Pollo Broaster 11,68.53
+882,104,Papas Gajo 14,173.38
+883,112,Wrap Vegetariano 18,76.06
+884,159,Aceitunas 18,66.13
+885,84,Pollo Teriyaki 13,127.32
+886,154,Pizza Pepperoni 3,81.06
+887,85,Pollo Broaster 18,63.61
+888,119,Aceitunas 10,193.41
+889,170,Aceitunas 16,169.56
+890,44,Pollo Saltado 20,125.42
+891,36,Croissant 7,81.74
+892,75,Ensalada de Pollo 3,36.5
+893,155,Croissant 8,184.46
+894,176,Ceviche 15,81.83
+895,178,Pizza Margarita 20,160.57
+896,199,Ensalada de Pollo 6,126.96
+897,176,Croissant 13,34.05
+898,117,Papas Gajo 2,121.65
+899,38,Pizza Pepperoni 17,38.64
+900,115,Arroz Frito 19,142.14
+901,158,Nigiri 20,171.37
+902,23,Aceitunas 19,113.74
+903,53,Tempura 10,106.84
+904,4,Ensalada de Pollo 16,54.8
+905,83,Pollo Saltado 2,52.05
+906,49,Papas Fritas 6,49.41
+907,196,Wrap Vegetariano 19,70.09
+908,93,Camarones Empanizados 20,33.19
+909,58,Tapas Variadas 3,48.94
+910,120,Baguette 14,51.4
+911,92,Quesadillas 11,148.58
+912,173,Tapas Variadas 18,158.93
+913,196,Ceviche 10,96.04
+914,50,Tacos al Pastor 8,181.35
+915,120,Papas Fritas 9,114.74
+916,66,Wrap Vegetariano 20,120.88
+917,125,Tapas Variadas 4,120.93
+918,196,Pollo Teriyaki 13,152.79
+919,91,Hamburguesa Clásica 11,85.89
+920,89,Torta Cubana 12,105.61
+921,197,Sashimi 5,116.58
+922,83,Tacos al Pastor 19,50.14
+923,122,Costillas BBQ 13,60.22
+924,4,Milanesa de Pollo 11,87.73
+925,93,Hamburguesa Clásica 1,164.99
+926,180,Croissant 18,41.55
+927,58,Ceviche 4,131.01
+928,52,Pizza Margarita 13,35.87
+929,23,Pizza Pepperoni 8,157.18
+930,180,Croissant 7,195.72
+931,155,Pizza Margarita 9,89.42
+932,106,Chorizo Asado 19,76.85
+933,1,Pizza Margarita 20,117.24
+934,77,Camarones Empanizados 14,75.61
+935,122,Hamburguesa Veggie 1,177.82
+936,21,Torta de Jamón 19,73.67
+937,121,Ceviche 15,39.72
+938,96,Quesadillas 19,121.2
+939,152,Ensalada 13,144.54
+940,189,Tempura 9,104.34
+941,165,Carne Asada 19,43.77
+942,85,Torta Cubana 18,170.76
+943,60,Baguette 20,116.42
+944,153,Costillas BBQ 10,172.91
+945,172,Baguette 1,142.76
+946,38,Pollo Teriyaki 11,148.4
+947,115,Lasaña 18,100.66
+948,105,Croissant 10,54.79
+949,40,Quiche Lorraine 8,104.9
+950,154,Torta Cubana 2,158.16
+951,124,Tapas Variadas 6,180.42
+952,91,Arroz Frito 17,139.74
+953,57,Wrap Vegetariano 19,142.63
+954,62,Arroz Frito 20,94.06
+955,97,Pollo Saltado 13,149.37
+956,27,Baguette 13,117.1
+957,138,Wrap Vegetariano 9,74.79
+958,96,Tapas Variadas 7,68.27
+959,65,Pizza Margarita 19,99.09
+960,6,Arroz Frito 5,159.55
+961,28,Ensalada César 15,188.72
+962,37,Puré de Papa 7,70.06
+963,39,Puré de Papa 13,92.78
+964,84,Croissant 17,101.95
+965,70,Camarones Empanizados 20,53.69
+966,47,Milanesa de Pollo 6,170.8
+967,125,Aceitunas 20,87.38
+968,74,Torta Cubana 19,126.52
+969,184,Hamburguesa Veggie 15,95.94
+970,21,Pasta Alfredo 18,95.38
+971,184,Wrap Vegetariano 20,44.67
+972,26,Pasta Alfredo 10,144.12
+973,188,Pizza Margarita 17,144.34
+974,139,Sushi Roll 16,101.39
+975,101,Tacos al Pastor 4,33.44
+976,30,Camarones Empanizados 13,46.44
+977,157,Ensalada 11,70.37
+978,52,Pollo Broaster 1,191.25
+979,134,Nigiri 20,50.13
+980,66,Nigiri 9,139.53
+981,82,Quiche Lorraine 16,77.76
+982,182,Café Americano 16,184.13
+983,13,Nigiri 15,116.66
+984,71,Pollo Broaster 9,148.54
+985,136,Ensalada de Pollo 12,194.64
+986,173,Ensalada de Pollo 2,142.96
+987,169,Lasaña 10,116.91
+988,15,Pollo Broaster 3,167.91
+989,94,Carne Asada 5,190.29
+990,172,Pollo Saltado 14,187.93
+991,89,Pollo Broaster 3,134.51
+992,68,Sushi Roll 20,64.24
+993,146,Sashimi 11,34.69
+994,61,Lasaña 9,53.8
+995,79,Ensalada César 7,155.78
+996,42,Papas Fritas 11,198.77
+997,175,Tapas Variadas 14,48.77
+998,132,Torta de Jamón 12,168.93
+999,34,Ensalada de Pollo 5,80.3
+1000,112,Pasta Alfredo 19,108.55

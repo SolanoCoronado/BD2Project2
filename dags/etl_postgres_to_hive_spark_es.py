@@ -33,10 +33,26 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    # 1. Extraer datos de PostgreSQL a CSV
-    extract_postgres = BashOperator(
-        task_id="extract_postgres",
-        bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM products) TO STDOUT WITH CSV HEADER\" > {EXPORT_PATH}",
+    # 1. Extraer datos de PostgreSQL a CSV (todas las tablas relevantes)
+    extract_products = BashOperator(
+        task_id="extract_products",
+        bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM products) TO STDOUT WITH CSV HEADER\" > /app/data/products.csv",
+    )
+    extract_orders = BashOperator(
+        task_id="extract_orders",
+        bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM orders) TO STDOUT WITH CSV HEADER\" > /app/data/orders.csv",
+    )
+    extract_reservations = BashOperator(
+        task_id="extract_reservations",
+        bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM reservations) TO STDOUT WITH CSV HEADER\" > /app/data/reservations.csv",
+    )
+    extract_menus = BashOperator(
+        task_id="extract_menus",
+        bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM menus) TO STDOUT WITH CSV HEADER\" > /app/data/menus.csv",
+    )
+    extract_restaurants = BashOperator(
+        task_id="extract_restaurants",
+        bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM restaurants) TO STDOUT WITH CSV HEADER\" > /app/data/restaurants.csv",
     )
 
     # 2. Transformar con Spark (ejemplo: script PySpark)
@@ -48,13 +64,29 @@ with DAG(
     # 2.1. Inicializar esquema de Hive ejecutando sentencias directamente
     init_hive_schema = BashOperator(
         task_id="init_hive_schema",
-        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000' -e \"CREATE DATABASE IF NOT EXISTS restaurant_db; USE restaurant_db; CREATE TABLE IF NOT EXISTS pedidos (pedido_id INT, usuario_id INT, producto_id INT, reserva_id INT, fecha DATE, cantidad INT, total DECIMAL(10,2)) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_usuarios (usuario_id INT, nombre STRING, email STRING, genero STRING, fecha_nacimiento DATE, ubicacion STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_productos (producto_id INT, nombre STRING, tipo STRING, precio DECIMAL(10,2)) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_reservas (reserva_id INT, usuario_id INT, fecha DATE, hora STRING, cantidad_personas INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_tiempo (fecha DATE, anio INT, mes INT, dia INT, trimestre INT, dia_semana STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;\"",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000' -e \"CREATE DATABASE IF NOT EXISTS restaurant_db; USE restaurant_db; CREATE TABLE IF NOT EXISTS pedidos (pedido_id INT, usuario_id INT, producto_id INT, reserva_id INT, fecha DATE, cantidad INT, total DECIMAL(10,2)) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_usuarios (usuario_id INT, nombre STRING, email STRING, genero STRING, fecha_nacimiento DATE, ubicacion STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_productos (producto_id INT, nombre STRING, tipo STRING, precio DECIMAL(10,2)) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_reservas (reserva_id INT, usuario_id INT, fecha DATE, hora STRING, cantidad_personas INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_tiempo (fecha DATE, anio INT, mes INT, dia INT, trimestre INT, dia_semana STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_menus (menu_id INT, restaurant_id INT, nombre STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; CREATE TABLE IF NOT EXISTS dim_restaurantes (restaurant_id INT, nombre STRING, direccion STRING, owner_id STRING, is_available BOOLEAN, table_quantity INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;\"",
     )
 
-    # 3. Cargar en Hive (usando Beeline o PyHive)
-    load_hive = BashOperator(
-        task_id="load_hive",
-        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"LOAD DATA LOCAL INPATH '/app/data/exported_data.csv' OVERWRITE INTO TABLE dim_productos\"",
+    # 3. Cargar en Hive (usando Beeline o PyHive) para cada tabla relevante
+    load_hive_productos = BashOperator(
+        task_id="load_hive_productos",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"LOAD DATA LOCAL INPATH '/app/data/products.csv' OVERWRITE INTO TABLE dim_productos\"",
+    )
+    load_hive_pedidos = BashOperator(
+        task_id="load_hive_pedidos",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"LOAD DATA LOCAL INPATH '/app/data/orders.csv' OVERWRITE INTO TABLE pedidos\"",
+    )
+    load_hive_reservas = BashOperator(
+        task_id="load_hive_reservas",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"LOAD DATA LOCAL INPATH '/app/data/reservations.csv' OVERWRITE INTO TABLE dim_reservas\"",
+    )
+    load_hive_menus = BashOperator(
+        task_id="load_hive_menus",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"LOAD DATA LOCAL INPATH '/app/data/menus.csv' OVERWRITE INTO TABLE dim_menus\"",
+    )
+    load_hive_restaurantes = BashOperator(
+        task_id="load_hive_restaurantes",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"LOAD DATA LOCAL INPATH '/app/data/restaurants.csv' OVERWRITE INTO TABLE dim_restaurantes\"",
     )
 
     # 4. Reindexar ElasticSearch si cambia el catálogo de productos
@@ -67,4 +99,85 @@ with DAG(
         python_callable=reindex_es,
     )
 
-    extract_postgres >> transform_spark >> init_hive_schema >> load_hive >> reindex_elasticsearch
+    # 5. Cargar resultados OLAP en Hive
+    load_hive_olap_tendencias = BashOperator(
+        task_id="load_hive_olap_tendencias",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_tendencias_consumo (order_year INT, order_month INT, ventas_totales DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/app/data/olap_tendencias_consumo.csv' OVERWRITE INTO TABLE olap_tendencias_consumo\"",
+    )
+    load_hive_olap_horarios = BashOperator(
+        task_id="load_hive_olap_horarios",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_horarios_pico (order_hour INT, cantidad_pedidos INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/app/data/olap_horarios_pico.csv' OVERWRITE INTO TABLE olap_horarios_pico\"",
+    )
+    load_hive_olap_crecimiento = BashOperator(
+        task_id="load_hive_olap_crecimiento",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_crecimiento_mensual (order_year INT, order_month INT, ventas_totales DOUBLE, ventas_previas DOUBLE, crecimiento_mensual DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/app/data/olap_crecimiento_mensual.csv' OVERWRITE INTO TABLE olap_crecimiento_mensual\"",
+    )
+    load_hive_olap_ventas_tipo = BashOperator(
+        task_id="load_hive_olap_ventas_tipo",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_ventas_por_tipo (tipo STRING, ventas_totales DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/app/data/olap_ventas_por_tipo.csv' OVERWRITE INTO TABLE olap_ventas_por_tipo\"",
+    )
+    load_hive_olap_actividad_ubicacion = BashOperator(
+        task_id="load_hive_olap_actividad_ubicacion",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_actividad_ubicacion (ubicacion STRING, actividad INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/app/data/olap_actividad_ubicacion.csv' OVERWRITE INTO TABLE olap_actividad_ubicacion\"",
+    )
+    load_hive_olap_frecuencia_usuarios = BashOperator(
+        task_id="load_hive_olap_frecuencia_usuarios",
+        bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_frecuencia_usuarios (user_id STRING, num_operaciones INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/app/data/olap_frecuencia_usuarios.csv' OVERWRITE INTO TABLE olap_frecuencia_usuarios\"",
+    )
+
+    # Tareas para mover los archivos part-* a archivos CSV planos
+    move_olap_tendencias = BashOperator(
+        task_id="move_olap_tendencias",
+        bash_command="mv /app/data/olap_tendencias_consumo.csv/part-* /app/data/olap_tendencias_consumo.csv || true",
+    )
+    move_olap_horarios = BashOperator(
+        task_id="move_olap_horarios",
+        bash_command="mv /app/data/olap_horarios_pico.csv/part-* /app/data/olap_horarios_pico.csv || true",
+    )
+    move_olap_crecimiento = BashOperator(
+        task_id="move_olap_crecimiento",
+        bash_command="mv /app/data/olap_crecimiento_mensual.csv/part-* /app/data/olap_crecimiento_mensual.csv || true",
+    )
+    move_olap_ventas_tipo = BashOperator(
+        task_id="move_olap_ventas_tipo",
+        bash_command="mv /app/data/olap_ventas_por_tipo.csv/part-* /app/data/olap_ventas_por_tipo.csv || true",
+    )
+    move_olap_actividad_ubicacion = BashOperator(
+        task_id="move_olap_actividad_ubicacion",
+        bash_command="mv /app/data/olap_actividad_ubicacion.csv/part-* /app/data/olap_actividad_ubicacion.csv || true",
+    )
+    move_olap_frecuencia_usuarios = BashOperator(
+        task_id="move_olap_frecuencia_usuarios",
+        bash_command="mv /app/data/olap_frecuencia_usuarios.csv/part-* /app/data/olap_frecuencia_usuarios.csv || true",
+    )
+
+    # Encadenar dependencias de movimiento antes de cargar en Hive
+    init_hive_schema >> move_olap_tendencias >> load_hive_olap_tendencias
+    init_hive_schema >> move_olap_horarios >> load_hive_olap_horarios
+    init_hive_schema >> move_olap_crecimiento >> load_hive_olap_crecimiento
+    init_hive_schema >> move_olap_ventas_tipo >> load_hive_olap_ventas_tipo
+    init_hive_schema >> move_olap_actividad_ubicacion >> load_hive_olap_actividad_ubicacion
+    init_hive_schema >> move_olap_frecuencia_usuarios >> load_hive_olap_frecuencia_usuarios
+
+    # Dependencias
+    extract_products >> transform_spark
+    extract_orders >> transform_spark
+    extract_reservations >> transform_spark
+    extract_menus >> transform_spark
+    extract_restaurants >> transform_spark
+
+    transform_spark >> init_hive_schema
+    init_hive_schema >> [load_hive_productos, load_hive_pedidos, load_hive_reservas, load_hive_menus, load_hive_restaurantes]  # Agrega aquí load_hive_menus, load_hive_restaurantes si las usas
+
+    # load_hive_productos >> reindex_es (si implementas la tarea de reindexado)
+
+    # Dependencias para OLAP y OLAP adicional
+    transform_spark >> init_hive_schema
+    init_hive_schema >> [
+        load_hive_olap_tendencias,
+        load_hive_olap_horarios,
+        load_hive_olap_crecimiento,
+        load_hive_olap_ventas_tipo,
+        load_hive_olap_actividad_ubicacion,
+        load_hive_olap_frecuencia_usuarios
+    ]
