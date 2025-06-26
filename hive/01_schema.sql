@@ -67,4 +67,4 @@ FIELDS TERMINATED BY ','
 STORED AS TEXTFILE;
 
 -- Verificar que las tablas se crearon correctamente
-SHOW TABLES;
+-- SHOW TABLES;

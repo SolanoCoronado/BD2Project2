@@ -49,6 +49,8 @@ services:
       - "10000:10000"
     volumes:
       - ./hive:/docker-entrypoint-initdb.d
+      - ./hive/products_hive.sql:/docker-entrypoint-initdb.d/products_hive.sql
+      - ./data:/app/data
 
   spark:
     image: bitnami/spark:latest
@@ -97,6 +99,55 @@ services:
     depends_on:
       - superset-db
       - spark
+
+  airflow:
+    image: apache/airflow:2.8.1
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__FERNET_KEY=KhDBDbI--jl8gE9jpNlkQh6Tn_qr2sJxY8gVovq2Gl8=
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://superset:superset@superset-db:5432/superset
+      - _PIP_ADDITIONAL_REQUIREMENTS=psycopg2-binary pandas pyhive
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/app/scripts
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: >
+      bash -c "\
+        airflow db init && \
+        airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@admin.com || true && \
+        airflow webserver & airflow scheduler"
+    depends_on:
+      - superset-db
+      - hive-server
+      - spark
+
+  postgres:
+    image: postgres:13
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      DATABASE_HOST: 127.0.0.1
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: password1234
+      POSTGRES_DB: DBTC01
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "prueba01@tc.com"
+      PGADMIN_DEFAULT_PASSWORD: "password1234"
 
 volumes:
   namenode:
