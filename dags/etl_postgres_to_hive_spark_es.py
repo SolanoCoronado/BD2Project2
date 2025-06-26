@@ -67,79 +67,26 @@ with DAG(
         bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT * FROM restaurants) TO STDOUT WITH CSV HEADER\" > /app/data/restaurants.csv",
     )
 
-    # 2. Transformar con Spark (ejemplo: script PySpark)
-    transform_spark = BashOperator(
-        task_id="transform_spark",
-        bash_command="docker exec bd2project2-spark-1 /opt/bitnami/spark/bin/spark-submit /app/scripts/spark_olap_analysis.py",
+    # 1.1. Inicializar esquema Hive (modelo estrella)
+    init_hive_schema = BashOperator(
+        task_id="init_hive_schema",
+        bash_command='''docker exec bd2project2-hive-server-1 beeline -u "jdbc:hive2://localhost:10000" -e "CREATE DATABASE IF NOT EXISTS restaurant_db; CREATE TABLE IF NOT EXISTS restaurant_db.dim_tiempo (fecha DATE, anio INT, mes INT, dia INT) STORED AS PARQUET; CREATE TABLE IF NOT EXISTS restaurant_db.dim_producto (producto_id STRING, nombre STRING, price DOUBLE, menu_id STRING) STORED AS PARQUET; CREATE TABLE IF NOT EXISTS restaurant_db.dim_restaurante (restaurante_id STRING, nombre STRING, address STRING) STORED AS PARQUET; CREATE TABLE IF NOT EXISTS restaurant_db.fact_pedidos (pedido_id STRING, user_id STRING, restaurante_id STRING, producto_id STRING, fecha DATE, total DOUBLE) STORED AS PARQUET;"'''
     )
 
-    # Eliminar la tarea y dependencia de reindex_elasticsearch si no usas ElasticSearch
-    # def reindex_es():
-    #     print("Reindexando ElasticSearch...")
-    # reindex_elasticsearch = PythonOperator(
-    #     task_id="reindex_elasticsearch",
-    #     python_callable=reindex_es,
-    # )
-    # load_hive_productos >> reindex_es
+    # 2. Transformar, crear modelo estrella y cubos OLAP en Hive con Spark
+    transform_spark_olap = BashOperator(
+        task_id="transform_spark_olap",
+        bash_command="docker exec bd2project2-spark-1 /opt/bitnami/spark/bin/spark-submit /app/scripts/spark_analysis.py",
+    )
 
-    # 5. Cargar resultados OLAP en Hive (comentado temporalmente)
-    # load_hive_olap_tendencias = BashOperator(
-    #     task_id="load_hive_olap_tendencias",
-    #     bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_tendencias_consumo (order_year INT, order_month INT, ventas_totales DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/data/olap_tendencias_consumo.csv' OVERWRITE INTO TABLE olap_tendencias_consumo\"",
-    # )
-    # load_hive_olap_horarios = BashOperator(
-    #     task_id="load_hive_olap_horarios",
-    #     bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_horarios_pico (order_hour INT, cantidad_pedidos INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/data/olap_horarios_pico.csv' OVERWRITE INTO TABLE olap_horarios_pico\"",
-    # )
-    # load_hive_olap_crecimiento = BashOperator(
-    #     task_id="load_hive_olap_crecimiento",
-    #     bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_crecimiento_mensual (order_year INT, order_month INT, ventas_totales DOUBLE, ventas_previas DOUBLE, crecimiento_mensual DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/data/olap_crecimiento_mensual.csv' OVERWRITE INTO TABLE olap_crecimiento_mensual\"",
-    # )
-    # load_hive_olap_ventas_tipo = BashOperator(
-    #     task_id="load_hive_olap_ventas_tipo",
-    #     bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_ventas_por_tipo (tipo STRING, ventas_totales DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/data/olap_ventas_por_tipo.csv' OVERWRITE INTO TABLE olap_ventas_por_tipo\"",
-    # )
-    # load_hive_olap_actividad_ubicacion = BashOperator(
-    #     task_id="load_hive_olap_actividad_ubicacion",
-    #     bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_actividad_ubicacion (ubicacion STRING, actividad INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/data/olap_actividad_ubicacion.csv' OVERWRITE INTO TABLE olap_actividad_ubicacion\"",
-    # )
-    # load_hive_olap_frecuencia_usuarios = BashOperator(
-    #     task_id="load_hive_olap_frecuencia_usuarios",
-    #     bash_command="docker exec bd2project2-hive-server-1 beeline -u 'jdbc:hive2://localhost:10000/restaurant_db' -e \"CREATE TABLE IF NOT EXISTS olap_frecuencia_usuarios (user_id INT, num_operaciones INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE; LOAD DATA LOCAL INPATH '/data/olap_frecuencia_usuarios.csv' OVERWRITE INTO TABLE olap_frecuencia_usuarios\"",
-    # )
+    # Dependencias: init_hive_schema antes de Spark
+    extract_products >> init_hive_schema
+    extract_orders >> init_hive_schema
+    extract_reservations >> init_hive_schema
+    extract_menus >> init_hive_schema
+    extract_restaurants >> init_hive_schema
 
-    # --- Eliminar temporalmente las tareas de mover archivos OLAP y cargar a Hive ---
-    # (Puedes descomentar y restaurar estas tareas cuando quieras cargar los resultados OLAP a Hive)
-
-    # --- Eliminar dependencias relacionadas ---
-    # init_hive_schema >> move_olap_tendencias >> load_hive_olap_tendencias
-    # init_hive_schema >> move_olap_horarios >> load_hive_olap_horarios
-    # init_hive_schema >> move_olap_crecimiento >> load_hive_olap_crecimiento
-    # init_hive_schema >> move_olap_ventas_tipo >> load_hive_olap_ventas_tipo
-    # init_hive_schema >> move_olap_actividad_ubicacion >> load_hive_olap_actividad_ubicacion
-    # init_hive_schema >> move_olap_frecuencia_usuarios >> load_hive_olap_frecuencia_usuarios
-
-    # Dependencias
-    extract_products >> transform_spark
-    extract_orders >> transform_spark
-    extract_reservations >> transform_spark
-    extract_menus >> transform_spark
-    extract_restaurants >> transform_spark
-
-    transform_spark
-
-    # load_hive_productos >> reindex_es (si implementas la tarea de reindexado)
-
-    # Dependencias para OLAP y OLAP adicional (eliminadas temporalmente)
-    # transform_spark >> init_hive_schema
-    # init_hive_schema >> [
-    #     load_hive_olap_tendencias,
-    #     load_hive_olap_horarios,
-    #     load_hive_olap_crecimiento,
-    #     load_hive_olap_ventas_tipo,
-    #     load_hive_olap_actividad_ubicacion,
-    #     load_hive_olap_frecuencia_usuarios
-    # ]
+    init_hive_schema >> transform_spark_olap
 
     # Dependencias: poblar antes de extraer
     populate_postgres_faker >> [extract_products, extract_orders, extract_reservations, extract_menus, extract_restaurants]

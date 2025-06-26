@@ -85,11 +85,22 @@ def insert_orders():
     for i in range(N_ORDERS):
         user_id = f"user{random.randint(1, 1000):03d}"
         restaurant_id = random.randint(1, N_RESTAURANTS)
+        # Seleccionar productos solo del restaurante correspondiente
+        cur.execute("SELECT id FROM products WHERE menu_id IN (SELECT id FROM menus WHERE restaurant_id = %s)", (restaurant_id,))
+        product_ids = [row[0] for row in cur.fetchall()]
+        if not product_ids:
+            # Si no hay productos para ese restaurante, asignar un producto aleatorio global
+            cur.execute("SELECT id FROM products ORDER BY RANDOM() LIMIT 1")
+            product_id = cur.fetchone()[0]
+        else:
+            product_id = random.choice(product_ids)
         total_price = round(random.uniform(50, 500), 2)
         order_status = random.choice(["pendiente", "listo", "entregado", "preparando"])
         pick_in_site = random.choice([True, False])
-        orders.append((user_id, restaurant_id, total_price, order_status, pick_in_site))
-    cur.executemany("INSERT INTO orders (user_id, restaurant_id, total_price, order_status, pick_in_site) VALUES (%s, %s, %s, %s, %s)", orders)
+        days_offset = random.randint(0, 60)
+        order_date = (datetime(2025, 6, 1) + timedelta(days=days_offset)).date()
+        orders.append((user_id, restaurant_id, product_id, total_price, order_status, pick_in_site, order_date))
+    cur.executemany("INSERT INTO orders (user_id, restaurant_id, product_id, total_price, order_status, pick_in_site, order_date) VALUES (%s, %s, %s, %s, %s, %s, %s)", orders)
     conn.commit()
 
 if __name__ == "__main__":
