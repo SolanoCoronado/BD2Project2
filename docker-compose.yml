@@ -51,6 +51,7 @@ services:
       - ./hive:/docker-entrypoint-initdb.d
       - ./hive/products_hive.sql:/docker-entrypoint-initdb.d/products_hive.sql
       - ./data:/app/data
+      - ./data:/data
 
   spark:
     image: bitnami/spark:latest
@@ -107,7 +108,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=KhDBDbI--jl8gE9jpNlkQh6Tn_qr2sJxY8gVovq2Gl8=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://superset:superset@superset-db:5432/superset
-      - _PIP_ADDITIONAL_REQUIREMENTS=psycopg2-binary pandas pyhive
+      - _PIP_ADDITIONAL_REQUIREMENTS=psycopg2-binary pandas pyhive faker
     ports:
       - "8080:8080"
     volumes:

@@ -8,82 +8,100 @@ import sys
 
 if __name__ == "__main__":
     input_path = sys.argv[1]  # Ruta al CSV exportado desde Postgres
-    output_path = "/app/data/transformed_data.csv"
+    output_path = "/data/transformed_data.csv"
 
     spark = SparkSession.builder.appName("TransformPostgresToHive").getOrCreate()
 
-    # Leer CSV exportado de Postgres
-    df = spark.read.option("header", True).csv(input_path)
+    # Leer los tres archivos principales
+    orders_path = "/data/orders.csv"
+    products_path = "/data/products.csv"
+    reservations_path = "/data/reservations.csv"
+    restaurants_path = "/data/restaurants.csv"
 
-    # Limpieza: eliminar filas con valores nulos en columnas clave
-    df_clean = df.dropna(subset=["id", "menu_id", "name", "price"])
+    df_orders = spark.read.option("header", True).csv(orders_path)
+    df_products = spark.read.option("header", True).csv(products_path)
+    df_reservations = spark.read.option("header", True).csv(reservations_path)
+    df_restaurants = spark.read.option("header", True).csv(restaurants_path)
 
-    # Conversión de tipos
-    df_typed = df_clean.withColumn("id", df_clean["id"].cast("int")) \
-                        .withColumn("menu_id", df_clean["menu_id"].cast("int")) \
-                        .withColumn("price", df_clean["price"].cast("double"))
+    # Si orders.csv no tiene order_date, agregarlo al export desde Postgres
+    # Puedes modificar el BashOperator extract_orders en tu DAG así:
+    # bash_command=f"psql {POSTGRES_CONN} -c \"COPY (SELECT *, COALESCE(order_date, NOW()::date) as order_date FROM orders) TO STDOUT WITH CSV HEADER\" > /app/data/orders.csv",
+    # Si tu tabla orders no tiene order_date, puedes generar una fecha aleatoria en Python antes de exportar.
+    # Ejemplo de generación en Python (fuera de Spark):
+    # import pandas as pd, numpy as np
+    # df = pd.read_csv('orders.csv')
+    # if 'order_date' not in df.columns:
+    #     df['order_date'] = pd.to_datetime('2025-06-01') + pd.to_timedelta(np.random.randint(0, 30, size=len(df)), unit='D')
+    # df.to_csv('orders.csv', index=False)
+    #
+    # Puedes poner este snippet en un script previo o como un PythonOperator en Airflow.
+    #
+    # Lo importante: orders.csv debe tener una columna order_date (YYYY-MM-DD) antes de que Spark lo procese.
+    #
+    # El resto del pipeline funcionará correctamente con la lógica Spark ya implementada.
 
-    # Filtro más suave: solo precios positivos y no nulos
-    df_filtered = df_typed.filter(df_typed.price > 0)
+    # Asegurar que orders tenga order_date (si no existe, crear una aleatoria para demo)
+    from pyspark.sql.functions import monotonically_increasing_id, to_date, expr
+    if 'order_date' not in df_orders.columns:
+        # Generar fechas aleatorias en junio 2025
+        df_orders = df_orders.withColumn(
+            "order_date",
+            expr("date_add('2025-06-01', cast(rand() * 29 as int))")
+        )
 
-    # Guardar datos transformados completos
-    df_filtered.coalesce(1).write.mode("overwrite").option("header", True).csv(output_path)
+    # Unir orders con products para obtener tipo/category
+    if 'product_id' in df_orders.columns:
+        df_orders = df_orders.join(df_products.withColumnRenamed('id', 'product_id'), on='product_id', how='left')
+    elif 'menu_id' in df_orders.columns:
+        df_orders = df_orders.join(df_products.withColumnRenamed('id', 'menu_id'), on='menu_id', how='left')
+    # Unir orders con restaurants para obtener address
+    if 'restaurant_id' in df_orders.columns:
+        df_orders = df_orders.join(df_restaurants.withColumnRenamed('id', 'restaurant_id'), on='restaurant_id', how='left')
+
+    # Cast de columnas necesarias
+    from pyspark.sql.functions import col
+    df_orders = df_orders.withColumn("total_price", col("total_price").cast("double"))
+    df_orders = df_orders.withColumn("order_date", to_date(col("order_date")))
 
     # --- Análisis OLAP ---
-    from pyspark.sql.functions import month, year, hour, sum as _sum, count as _count, col, lag, lit
-    from pyspark.sql.window import Window
-
     # Tendencias de consumo: ventas totales por mes
-    df_orders = df_filtered  # Asume que el input es orders.csv o similar
-    if 'total_price' in df_orders.columns and 'id' in df_orders.columns:
-        df_orders = df_orders.withColumn("total_price", col("total_price").cast("double"))
-        if 'order_date' in df_orders.columns:
-            df_orders = df_orders.withColumn("order_month", month(col("order_date"))) \
-                                   .withColumn("order_year", year(col("order_date")))
-        elif 'reservation_time' in df_orders.columns:
-            df_orders = df_orders.withColumn("order_month", month(col("reservation_time"))) \
-                                   .withColumn("order_year", year(col("reservation_time")))
-        else:
-            df_orders = df_orders.withColumn("order_month", lit(None)).withColumn("order_year", lit(None))
+    from pyspark.sql.functions import month, year, hour, sum as _sum, count as _count, lag, lit
+    from pyspark.sql.window import Window
+    df_orders = df_orders.withColumn("order_month", month(col("order_date"))) \
+                           .withColumn("order_year", year(col("order_date")))
+    tendencias = df_orders.groupBy("order_year", "order_month").agg(_sum("total_price").alias("ventas_totales"))
+    tendencias.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_tendencias_consumo.csv")
 
-        tendencias = df_orders.groupBy("order_year", "order_month").agg(_sum("total_price").alias("ventas_totales"))
-        tendencias.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_tendencias_consumo.csv")
+    # Horarios pico: cantidad de pedidos por hora
+    df_orders = df_orders.withColumn("order_hour", hour(col("order_date")))
+    horarios_pico = df_orders.groupBy("order_hour").agg(_count("id").alias("cantidad_pedidos"))
+    horarios_pico.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_horarios_pico.csv")
 
-        # Horarios pico: cantidad de pedidos por hora
-        if 'order_date' in df_orders.columns:
-            df_orders = df_orders.withColumn("order_hour", hour(col("order_date")))
-        elif 'reservation_time' in df_orders.columns:
-            df_orders = df_orders.withColumn("order_hour", hour(col("reservation_time")))
-        else:
-            df_orders = df_orders.withColumn("order_hour", lit(None))
-        horarios_pico = df_orders.groupBy("order_hour").agg(_count("id").alias("cantidad_pedidos"))
-        horarios_pico.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_horarios_pico.csv")
-
-        # Crecimiento mensual: variación de ventas mes a mes
-        windowSpec = Window.orderBy("order_year", "order_month")
-        tendencias = tendencias.withColumn("ventas_previas", lag("ventas_totales").over(windowSpec))
-        tendencias = tendencias.withColumn("crecimiento_mensual", (col("ventas_totales") - col("ventas_previas")) / col("ventas_previas"))
-        tendencias.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_crecimiento_mensual.csv")
+    # Crecimiento mensual: variación de ventas mes a mes
+    windowSpec = Window.orderBy("order_year", "order_month")
+    tendencias = tendencias.withColumn("ventas_previas", lag("ventas_totales").over(windowSpec))
+    tendencias = tendencias.withColumn("crecimiento_mensual", (col("ventas_totales") - col("ventas_previas")) / col("ventas_previas"))
+    tendencias.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_crecimiento_mensual.csv")
 
     # --- OLAP adicional ---
     # 1. Ventas por tipo de producto (asume columna 'tipo' o 'category' en productos)
     if 'tipo' in df_orders.columns or 'category' in df_orders.columns:
         tipo_col = 'tipo' if 'tipo' in df_orders.columns else 'category'
         ventas_tipo = df_orders.groupBy(tipo_col).agg(_sum("total_price").alias("ventas_totales"))
-        ventas_tipo.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_ventas_por_tipo.csv")
+        ventas_tipo.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_ventas_por_tipo.csv")
 
     # 2. Actividad por ubicación (asume columna 'ubicacion' o 'address' en usuarios o restaurantes)
     if 'ubicacion' in df_orders.columns:
         actividad_ubicacion = df_orders.groupBy("ubicacion").agg(_count("id").alias("actividad"))
-        actividad_ubicacion.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_actividad_ubicacion.csv")
+        actividad_ubicacion.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_actividad_ubicacion.csv")
     elif 'address' in df_orders.columns:
         actividad_ubicacion = df_orders.groupBy("address").agg(_count("id").alias("actividad"))
-        actividad_ubicacion.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_actividad_ubicacion.csv")
+        actividad_ubicacion.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_actividad_ubicacion.csv")
 
     # 3. Frecuencia de uso por usuario (cantidad de pedidos/reservas por usuario)
     if 'user_id' in df_orders.columns:
         frecuencia_usuarios = df_orders.groupBy("user_id").agg(_count("id").alias("num_operaciones"))
-        frecuencia_usuarios.coalesce(1).write.mode("overwrite").option("header", True).csv("/app/data/olap_frecuencia_usuarios.csv")
+        frecuencia_usuarios.coalesce(1).write.mode("overwrite").option("header", True).csv("/data/olap_frecuencia_usuarios.csv")
 
     print("Transformación y análisis OLAP completados. Archivos: transformed_data.csv, olap_tendencias_consumo.csv, olap_horarios_pico.csv, olap_crecimiento_mensual.csv")
 
@@ -131,13 +149,13 @@ if __name__ == "__main__":
 
     # Lista de todos los archivos OLAP y de datos transformados
     output_files = [
-        '/app/data/transformed_data.csv',
-        '/app/data/olap_tendencias_consumo.csv',
-        '/app/data/olap_horarios_pico.csv',
-        '/app/data/olap_crecimiento_mensual.csv',
-        '/app/data/olap_ventas_por_tipo.csv',
-        '/app/data/olap_actividad_ubicacion.csv',
-        '/app/data/olap_frecuencia_usuarios.csv',
+        '/data/transformed_data.csv',
+        '/data/olap_tendencias_consumo.csv',
+        '/data/olap_horarios_pico.csv',
+        '/data/olap_crecimiento_mensual.csv',
+        '/data/olap_ventas_por_tipo.csv',
+        '/data/olap_actividad_ubicacion.csv',
+        '/data/olap_frecuencia_usuarios.csv',
     ]
     for path in output_files:
         flatten_csv_dir(path)
