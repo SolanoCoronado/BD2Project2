@@ -108,4 +108,11 @@ GROUP BY fecha
 ORDER BY fecha
 """)
 
+# Exportar cubos/vistas OLAP a CSV para análisis externo o visualización
+spark.sql("SELECT * FROM restaurant_db.cubo_ventas_tiempo").toPandas().to_csv("/data/cubo_ventas_tiempo.csv", index=False)
+spark.sql("SELECT * FROM restaurant_db.cubo_ventas_producto").toPandas().to_csv("/data/cubo_ventas_producto.csv", index=False)
+spark.sql("SELECT * FROM restaurant_db.cubo_ventas_restaurante").toPandas().to_csv("/data/cubo_ventas_restaurante.csv", index=False)
+spark.sql("SELECT * FROM restaurant_db.cubo_frecuencia_usuario").toPandas().to_csv("/data/cubo_frecuencia_usuario.csv", index=False)
+spark.sql("SELECT * FROM restaurant_db.cubo_ventas_diarias").toPandas().to_csv("/data/cubo_ventas_diarias.csv", index=False)
+
 spark.stop()

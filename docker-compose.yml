@@ -54,7 +54,8 @@ services:
       - ./data:/data
 
   spark:
-    image: bitnami/spark:latest
+    build:
+      context: ./spark
     environment:
       - SPARK_MODE=client
       - HOME=/tmp
